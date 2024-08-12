@@ -1,10 +1,14 @@
 """Этот модуль содержит функции для работы с новыми возможностями приложения."""
-from masks import get_mask_card_number, get_mask_account
+
 from typing import Optional
+
+from masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(account_card_info: str) -> Optional[str]:
-    if account_card_info[-17] == ' ':
-        return account_card_info[:-17] + ' ' + get_mask_card_number(account_card_info[-16:])
+    """Маскирует счет или номер карты"""
+    # считаем кол-во цифр и определяем - счет или карта
+    if account_card_info[-17] == " ":
+        return str(account_card_info[:-17] + " " + get_mask_card_number(account_card_info[-16:]))
     else:
-        return account_card_info[:-21] + ' ' + get_mask_account(account_card_info[-20:])
+        return str(account_card_info[:-21] + " " + get_mask_account(account_card_info[-20:]))
