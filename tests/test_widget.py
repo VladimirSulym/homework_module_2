@@ -1,6 +1,6 @@
 import pytest
 
-from src.widget import mask_account_card
+from src.widget import mask_account_card, get_date
 
 
 @pytest.mark.parametrize(
@@ -20,3 +20,21 @@ from src.widget import mask_account_card
 )
 def test_mask_account_card(account_card, expected):
     assert mask_account_card(account_card) == expected
+
+
+@pytest.mark.parametrize(
+    'date, expected',
+    [
+        ('2019-07-03T18:35:29.512364', '03.07.2019'),
+        ('2019-AS-03T18:35:29.512364', None),
+        ('2019-0703T18:35:29.512364', None),
+        ('2019-07-03T18:29.512364', '03.07.2019'),
+        (None, None),
+        (123123, None),
+        (False, None),
+        (True, None),
+        ('EXECUTED', None),
+    ]
+)
+def test_get_date(date, expected):
+    assert get_date(date) == expected
