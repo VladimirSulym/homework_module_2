@@ -6,7 +6,14 @@ from typing import Iterable, Union
 def filter_by_state(my_list: Union[list], state: Union[str] = "EXECUTED") -> Iterable[list]:
     """Функция принимает на вход список словарей с данными о банковских операциях и параметр state, возвращает новый
     список, содержащий только те словари, у которых ключ state содержит переданное в функцию значение."""
-    return [i for i in my_list if i["state"] == state]
+    if my_list and state in ["CANCELED", "EXECUTED", None]:
+        try:
+            if state == None:
+                state = "EXECUTED"
+            result = [i for i in my_list if i["state"] == state]
+        except KeyError as e:
+            result = None
+        return result
 
 
 def sort_by_date(my_list: Union[list], sort_descending: Union[bool] = True) -> Union[list]:
