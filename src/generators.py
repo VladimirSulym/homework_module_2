@@ -7,6 +7,11 @@ def filter_by_currency(list_transaction: list, currency: str) -> Any:
             yield i
 
 
+def transaction_descriptions(list_transaction: list) -> Any:
+    for i in list_transaction:
+        yield i['description']
+
+
 transactions = [{
     "id": 939719570,
     "state": "EXECUTED",
@@ -41,5 +46,12 @@ usd_transactions = filter_by_currency(transactions, "USD")
 for i in range(2):
     try:
         print(next(usd_transactions))
+    except StopIteration:
+        break
+
+descriptions = transaction_descriptions(transactions)
+for _ in range(5):
+    try:
+        print(next(descriptions))
     except StopIteration:
         break
