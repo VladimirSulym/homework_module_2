@@ -1,10 +1,11 @@
 from typing import Any
 
 
-def filter_by_currency(list_transaction: list, currency: str) -> Any:
-    for i in list_transaction:
-        if i["operationAmount"]["currency"]["code"] == currency:
-            yield i
+def filter_by_currency(list_transaction: list = None, currency: str = None) -> Any:
+    if list_transaction and currency:
+        for i in list_transaction:
+            if i["operationAmount"]["currency"]["code"] == currency:
+                yield i
 
 
 def transaction_descriptions(list_transaction: list) -> Any:
@@ -20,6 +21,7 @@ def card_number_generator(begin: int, end: int) -> Any:
             for i in [4, 9, 14]:
                 temp_number.insert(i, " ")
             yield "".join(temp_number)
+
 
 #
 # transactions = [
@@ -70,6 +72,7 @@ def card_number_generator(begin: int, end: int) -> Any:
 #     },
 # ]
 #
+# print(next(filter_by_currency([], "USD")))
 # usd_transactions = filter_by_currency(transactions, "USD")
 # for i in range(5):
 #     try:

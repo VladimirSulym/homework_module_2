@@ -1,5 +1,6 @@
-from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 import pytest
+
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
 
 def test_filter_by_currency_1(my_lis_transactions):
@@ -33,7 +34,7 @@ def test_filter_by_currency_1(my_lis_transactions):
     }
     with pytest.raises(StopIteration) as exc_info:
         next(generator)
-        assert str(exc_info.value) == 'StopIteration'
+        assert str(exc_info.value) == "StopIteration"
 
 
 def test_filter_by_currency_2(my_lis_transactions):
@@ -58,8 +59,44 @@ def test_filter_by_currency_2(my_lis_transactions):
     }
     with pytest.raises(StopIteration) as exc_info:
         next(generator)
-        assert str(exc_info.value) == 'StopIteration'
+        assert str(exc_info.value) == "StopIteration"
 
+    with pytest.raises(StopIteration) as exc_info:
+        next(filter_by_currency(my_lis_transactions, None))
+        assert str(exc_info.value) == "StopIteration"
+
+    with pytest.raises(StopIteration) as exc_info:
+        next(filter_by_currency([], None))
+        assert str(exc_info.value) == "StopIteration"
+
+    with pytest.raises(StopIteration) as exc_info:
+        next(filter_by_currency([], "RUB"))
+        assert str(exc_info.value) == "StopIteration"
+
+    with pytest.raises(StopIteration) as exc_info:
+        next(filter_by_currency([], 123))
+        assert str(exc_info.value) == "StopIteration"
+
+    with pytest.raises(StopIteration) as exc_info:
+        next(filter_by_currency([]))
+        assert str(exc_info.value) == "StopIteration"
+
+    with pytest.raises(StopIteration) as exc_info:
+        next(filter_by_currency())
+        assert str(exc_info.value) == "StopIteration"
+
+
+# def test_filter_by_currency_3(my_lis_transactions):
+#     with pytest.raises(StopIteration) as exc_info:
+#         next(filter_by_currency(my_lis_transactions, None))
+#         assert str(exc_info.value) == 'StopIteration'
+#
+#     with pytest.raises(StopIteration) as exc_info:
+#         next(filter_by_currency([], None))
+#         assert str(exc_info.value) == 'StopIteration'
+
+
+# assert filter_by_currency([], "RUB") == None
 # @pytest.mark.parametrize('lis_transactions, currency, expected', [
 #     ([{
 #          "id": 939719570,
