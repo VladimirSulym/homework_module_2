@@ -157,6 +157,52 @@ def test_transaction_descriptions_2():
         assert str(exc_info.value) == "StopIteration"
 
 
+def test_card_number_generator_1():
+    generator = card_number_generator(1, 3)
+    assert next(generator) == "0000 0000 0000 0001"
+    assert next(generator) == "0000 0000 0000 0002"
+    assert next(generator) == "0000 0000 0000 0003"
+
+    with pytest.raises(StopIteration) as exc_info:
+        next(generator)
+        assert str(exc_info.value) == "StopIteration"
+
+
+def test_card_number_generator_2():
+    generator = card_number_generator(3, 1)
+    assert next(generator) == "0000 0000 0000 0001"
+    assert next(generator) == "0000 0000 0000 0002"
+    assert next(generator) == "0000 0000 0000 0003"
+
+    with pytest.raises(StopIteration) as exc_info:
+        next(generator)
+        assert str(exc_info.value) == "StopIteration"
+
+
+def test_card_number_generator_3():
+    generator = card_number_generator()
+
+    with pytest.raises(StopIteration) as exc_info:
+        next(generator)
+        assert str(exc_info.value) == "StopIteration"
+
+
+def test_card_number_generator_4():
+    generator = card_number_generator(-10, -8)
+
+    with pytest.raises(StopIteration) as exc_info:
+        next(generator)
+        assert str(exc_info.value) == "StopIteration"
+
+
+def test_card_number_generator_5():
+    generator = card_number_generator("qweqw", "12")
+
+    with pytest.raises(StopIteration) as exc_info:
+        next(generator)
+        assert str(exc_info.value) == "StopIteration"
+
+
 # def test_filter_by_currency_3(my_lis_transactions):
 #     with pytest.raises(StopIteration) as exc_info:
 #         next(filter_by_currency(my_lis_transactions, None))
