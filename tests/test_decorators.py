@@ -1,7 +1,9 @@
+from typing import Any
+
 from src.decorators import summ_my_int
 
 
-def test_log(capsys):
+def test_log(capsys: Any) -> None:
     summ_my_int("1002", 2)
     captured = capsys.readouterr()
     assert captured.out == "summ_my_int error: TypeError. Inputs: ('1002', 2)\n"

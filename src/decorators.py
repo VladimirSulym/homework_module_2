@@ -1,11 +1,12 @@
 import os
+from typing import Optional, Callable, Any
 
 from config import LOGS_PATH
 
 
-def log(filename=None):
-    def my_decorator(func):
-        def wrapper(*args):
+def log(filename: Optional[str] = None) -> Callable:
+    def my_decorator(func: Callable) -> Callable:
+        def wrapper(*args: str) -> Any:
             try:
                 func(*args)
                 if filename:
@@ -29,7 +30,7 @@ def log(filename=None):
 
 
 @log()
-def summ_my_int(a, b):
+def summ_my_int(a: int, b: int) -> int:
     return a + b
 
 
