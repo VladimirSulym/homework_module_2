@@ -1,3 +1,5 @@
+"""Этот модуль будет использоваться для размещения декораторов, включая декоратор log"""
+
 import os
 from typing import Any, Callable, Optional
 
@@ -5,8 +7,13 @@ from config import LOGS_PATH
 
 
 def log(filename: Optional[str] = None) -> Callable:
+    """Внешняя функция, которая принимает аргументы для декоратора"""
+
     def my_decorator(func: Callable) -> Callable:
+        """Декоратор"""
+
         def wrapper(*args: str) -> Any:
+            """Функция-обертка"""
             try:
                 func(*args)
                 if filename:
