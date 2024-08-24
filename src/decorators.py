@@ -1,5 +1,5 @@
 import os
-from typing import Optional, Callable, Any
+from typing import Any, Callable, Optional
 
 from config import LOGS_PATH
 
