@@ -15,14 +15,14 @@ def log(filename: Optional[str] = None) -> Callable:
         def wrapper(*args: str) -> Any:
             """Функция-обертка"""
             try:
-                func(*args)
+                result = func(*args)
                 if filename:
                     with open(os.path.join(LOGS_PATH, filename), "w", encoding="UTF-8") as f:
                         f.write(f"{func.__name__} ок")
                         f.close()
                 else:
                     print(f"{func.__name__} ок")
-                return func
+                return result
             except Exception as e:
                 if filename:
                     with open(os.path.join(LOGS_PATH, filename), "w", encoding="UTF-8") as f:
@@ -41,4 +41,4 @@ def summ_my_int(a: int, b: int) -> int:
     return a + b
 
 
-summ_my_int()
+print(summ_my_int(1, 2))
