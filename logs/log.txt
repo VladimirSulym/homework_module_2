@@ -1,1 +1,1 @@
-summ_my_int error: TypeError. Inputs: ('wq', 2)
+summ_my_int error: TypeError. Inputs: ('1002', 2)
