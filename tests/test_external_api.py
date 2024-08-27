@@ -1,6 +1,6 @@
-from src.external_api import currency_conversion
-
 from unittest.mock import patch
+
+from src.external_api import currency_conversion
 
 
 @patch("os.getenv")
