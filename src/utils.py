@@ -5,9 +5,9 @@ from config import DATA_PATH
 from src.external_api import currency_conversion
 
 
-def get_data_json(path):
+def get_data_json(my_path):
     try:
-        with open(path, "r") as f:
+        with open(my_path, "r") as f:
             return json.load(f)
     except Exception:
         return []
@@ -25,5 +25,5 @@ def get_amount_transactions_in_rub(transaction):
         return transaction["operationAmount"]["amount"]
 
 
-# for i in range(10, 15):
-#     print(get_amount_transactions_in_rub(base_data[i]))
+for i in range(10, 15):
+    print(get_amount_transactions_in_rub(base_data[i]))
