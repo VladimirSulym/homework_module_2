@@ -29,6 +29,8 @@ pytest
 7. Если транзакция была в USD или EUR, происходит обращение к внешнему API для получения текущего курса валют 
 и конвертации суммы операции в рубли. Для конвертации валюты используется Exchange Rates Data API
 8. Написано логирование модулей masks.py и utils.py. Все логи из этих модулей сохраняются в файл [application.log](logs/application.log) 
+9. Создан модуль [read_csv_xlsx.py](src/read_csv_xlsx.py) который считывание финансовых операций из CSV- и XLSX-файлов
+10. Для модуля [read_csv_xlsx.py](src/read_csv_xlsx.py) написаны тесты [test_read_csv_xlsx.py](tests/test_read_csv_xlsx.py)
 
 ## Документация:
 Для получения дополнительной информации обратитесь к [документации](README.md).
