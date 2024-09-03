@@ -1,8 +1,8 @@
-from typing import Optional, Union
-from config import LOGS_PATH
 import logging
 import os
+from typing import Optional, Union
 
+from config import LOGS_PATH
 
 logging.basicConfig(
     level=logging.DEBUG,

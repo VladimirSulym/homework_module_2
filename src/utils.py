@@ -1,9 +1,8 @@
 import json
+import logging
 import os
 
 from config import LOGS_PATH
-import logging
-
 from src.external_api import currency_conversion
 
 logging.basicConfig(
