@@ -47,8 +47,9 @@ def transaction_search(dicts_trans: list, search_str: str) -> list:
         return result
 
 
-# transaction_search(convert_csv_to_list(os.path.join(DATA_PATH, "transactions.csv")),"Euro")
-
-# for i in transaction_search(convert_csv_to_list(os.path.join(DATA_PATH, "transactions.csv")),
-#                             "ОткрыТие вКЛада, EUR, 79277383088424042634")[:]:
-#     print(i)
+# if __name__ == '__main__':
+#     transaction_search(convert_csv_to_list(os.path.join(DATA_PATH, "transactions.csv")),"Euro")
+#
+#     for i in transaction_search(convert_csv_to_list(os.path.join(DATA_PATH, "transactions.csv")),
+#                                 "ОткрыТие вКЛада, EUR, 79277383088424042634")[:]:
+#         print(i)

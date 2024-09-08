@@ -12,7 +12,7 @@ def filter_by_state(my_list: Union[list], state: Union[str] = "EXECUTED") -> Uni
                 state = "EXECUTED"
             # формируем новый список и сразу проверяем словарь на соответствие шаблону данных, если он не соответствует
             # то он не попадает в результирующий список
-            result = [i for i in my_list if (i["state"] == state) and (set(i.keys()) == {"id", "state", "date"})]
+            result = [i for i in my_list if (i["state"] == str(state)) and (set(i.keys()) == {"id", "state", "date"})]
         except KeyError:
             result = None
         return result

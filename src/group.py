@@ -5,7 +5,7 @@ from config import DATA_PATH
 from src.read_csv_xlsx import convert_csv_to_list
 
 
-def group_agg(dict_list, categories_list):
+def group_agg(dict_list: list, categories_list: list) -> dict:
     """Функция принимает список словарей с данными о банковских операциях и список категорий операций,
     а возвращать словарь, в котором ключи — это названия категорий, а значения — это количество операций в каждой категории.
     """
@@ -17,14 +17,15 @@ def group_agg(dict_list, categories_list):
     return dict(counted)
 
 
-print(
-    group_agg(
-        convert_csv_to_list(os.path.join(DATA_PATH, "transactions.csv")),
-        [
-            "Перевод организации",
-            "Перевод со счета на счет",
-            "Перевод с карты на карту",
-            "Открытие вклада",
-        ],
-    )
-)
+# if __name__ == '__main__':
+#     print(
+#         group_agg(
+#             convert_csv_to_list(os.path.join(DATA_PATH, "transactions.csv")),
+#             [
+#                 "Перевод организации",
+#                 "Перевод со счета на счет",
+#                 "Перевод с карты на карту",
+#                 "Открытие вклада",
+#             ],
+#         )
+#     )
