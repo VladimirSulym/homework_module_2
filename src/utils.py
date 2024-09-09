@@ -24,7 +24,7 @@ def get_data_json(my_path):
             utils_logger.debug(f"Файл {os.path.basename(my_path)} открыт в режиме чтения")
             utils_logger.debug(f"Информация из файла {os.path.basename(my_path)} преобразована в json")
             utils_logger.info("Функция get_data_json завершила работу положительно")
-            return json.load(f)
+            return list(json.load(f))
     except Exception as e:
         utils_logger.error(f"Ошибка в функции get_data_json:\n{e}", exc_info=True)
         utils_logger.warning("Функция get_data_json завершила работу с ошибкой")

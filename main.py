@@ -3,13 +3,15 @@ from shutil import which
 
 from config import DATA_PATH
 from src.processing import filter_by_state
+from src.processing import sort_by_date
+from src.search import transaction_search
 from src.utils import get_data_json
 
 user_config = {
     'main_menu': None,
     'second_menu': [
         ['Отсортировать операции по дате?', 'Да', 'Нет', None],
-        ['Отсортировать по возрастанию или по убыванию?', 'По возрастанию', 'По убыванию', None],
+        ['Отсортировать по возрастанию или по убыванию?', 'По убыванию', 'По возрастанию', None],
         ['Выводить только рублевые тразакции?', 'Да', 'Нет', None],
         ['Отфильтровать список транзакций по определенному слову в описании?', 'Да', 'Нет', None]
     ],
@@ -30,9 +32,27 @@ def main():
             second_menu()
             path_json = os.path.join(DATA_PATH, "operations.json")
             data_json = get_data_json(path_json)
-            print(type(data_json))
-            print(data_json)
-            # print(filter_by_state(data_json))
+            # print(type(data_json))
+            # print(data_json)
+            # print(data_json[0].keys())
+            data_filter = filter_by_state(data_json, user_config['status'])
+            for index, value in enumerate(user_config['second_menu']):
+                # print('value =>', value)
+                # print('value =>', value[3])
+                match index:
+                    case 0:
+                        if value[3]:
+                            data_filter = sort_by_date(data_filter, user_config['second_menu'][index + 1][3])
+                            # print(data_filter)
+                    case 2:
+                        if value[3]:
+                            data_filter = transaction_search(data_filter, "RUB")
+                            # print(data_filter)
+                    case 3:
+                        if value[3]:
+                            data_filter = transaction_search(data_filter, input('Введите слово для фильтрации => '))
+                            # print(data_filter)
+            print(data_filter)
         case '2':
             print('Для обработки выбран CSV-файла.')
             get_status()
@@ -58,13 +78,22 @@ def get_status():
 
 def second_menu():
     print('Выборка операций:')
-    for value in user_config['second_menu']:
-        print(value[0], value[1], value[2])
-        input_user = input().lower()
-        if input_user == value[1].lower():
-            value[3] = True
-        elif input_user == value[2].lower():
-            value[3] = False
+    for index, value in enumerate(user_config['second_menu']):
+        if index != 1:
+            print(value[0], value[1], value[2])
+            input_user = input().lower()
+            if input_user == value[1].lower():
+                value[3] = True
+            elif input_user == value[2].lower():
+                value[3] = False
+        else:
+            if user_config['second_menu'][index - 1][3]:
+                print(value[0], value[1], value[2])
+                input_user = input().lower()
+                if input_user == value[1].lower():
+                    value[3] = True
+                elif input_user == value[2].lower():
+                    value[3] = False
 
     # print(user_config)
     # print(user_config['status'])
