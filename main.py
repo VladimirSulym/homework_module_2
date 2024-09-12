@@ -4,6 +4,7 @@ from shutil import which
 from config import DATA_PATH
 from src.processing import filter_by_state
 from src.processing import sort_by_date
+from src.read_csv_xlsx import convert_csv_to_list, convert_xlsx_to_list
 from src.search import transaction_search
 from src.utils import get_data_json
 
@@ -32,35 +33,67 @@ def main():
             second_menu()
             path_json = os.path.join(DATA_PATH, "operations.json")
             data_json = get_data_json(path_json)
-            # print(type(data_json))
-            # print(data_json)
-            # print(data_json[0].keys())
             data_filter = filter_by_state(data_json, user_config['status'])
             for index, value in enumerate(user_config['second_menu']):
-                # print('value =>', value)
-                # print('value =>', value[3])
                 match index:
                     case 0:
                         if value[3]:
                             data_filter = sort_by_date(data_filter, user_config['second_menu'][index + 1][3])
-                            # print(data_filter)
                     case 2:
                         if value[3]:
                             data_filter = transaction_search(data_filter, "RUB")
-                            # print(data_filter)
                     case 3:
                         if value[3]:
                             data_filter = transaction_search(data_filter, input('Введите слово для фильтрации => '))
-                            # print(data_filter)
             print(data_filter)
         case '2':
             print('Для обработки выбран CSV-файла.')
             get_status()
             second_menu()
+            path_csv = os.path.join(DATA_PATH, "transactions.csv")
+            data_csv = convert_csv_to_list(path_csv)
+            # print('data_csv =>', data_csv)
+            data_filter = filter_by_state(data_csv, user_config['status'])
+            # print(data_filter)
+            for index, value in enumerate(user_config['second_menu']):
+                match index:
+                    case 0:
+                        if value[3]:
+                            data_filter = sort_by_date(data_filter, user_config['second_menu'][index + 1][3])
+                            # print('1 эиап => \n',data_filter)
+                    case 2:
+                        if value[3]:
+                            data_filter = transaction_search(data_filter, "RUB")
+                            # print('2 эиап => \n', data_filter)
+                    case 3:
+                        if value[3]:
+                            data_filter = transaction_search(data_filter, input('Введите слово для фильтрации => '))
+                            # print('3 эиап => \n', data_filter)
+            print(data_filter)
         case '3':
             print('Для обработки выбран XLSX-файла.')
             get_status()
             second_menu()
+            path_xlsx = os.path.join(DATA_PATH, "transactions_excel.xlsx")
+            data_xlsx = convert_xlsx_to_list(path_xlsx)
+            # print('data_csv =>', data_csv)
+            data_filter = filter_by_state(data_xlsx, user_config['status'])
+            # print(data_filter)
+            for index, value in enumerate(user_config['second_menu']):
+                match index:
+                    case 0:
+                        if value[3]:
+                            data_filter = sort_by_date(data_filter, user_config['second_menu'][index + 1][3])
+                            # print('1 эиап => \n',data_filter)
+                    case 2:
+                        if value[3]:
+                            data_filter = transaction_search(data_filter, "RUB")
+                            # print('2 эиап => \n', data_filter)
+                    case 3:
+                        if value[3]:
+                            data_filter = transaction_search(data_filter, input('Введите слово для фильтрации => '))
+                            # print('3 эиап => \n', data_filter)
+            print(data_filter)
         case _:
             print(f'Пункт {user_config['main_menu']} в меню отсутствует')
 

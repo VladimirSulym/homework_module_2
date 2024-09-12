@@ -10,9 +10,11 @@ def filter_by_state(my_list: Union[list], state: Union[str] = "EXECUTED") -> Uni
         try:
             if state is None:
                 state = "EXECUTED"
+            # print('my_list => \n', my_list)
             # формируем новый список и сразу проверяем словарь на соответствие шаблону данных, если он не соответствует
             # то он не попадает в результирующий список
-            result = [i for i in my_list if (i.get("state") == str(state)) and (set(i.keys()) == {'id', 'state', 'date', 'operationAmount', 'description', 'from', 'to'})]
+            result = [i for i in my_list if (i.get("state") == str(state))]
+            # result = [i for i in my_list if (i.get("state") == str(state)) and (set(i.keys()) == {'id', 'state', 'date', 'operationAmount', 'description', 'from', 'to'})]
         except KeyError:
             result = None
         return result
@@ -27,7 +29,7 @@ def sort_by_date(my_list: Union[list], sort_descending: Union[bool] = True) -> U
         if sort_descending is None:
             sort_descending = True
         # удаляем из списка словарь, содержащий не полные данные и формируем новый список для сортировки
-        new_list = [i for i in my_list if set(i.keys()) == {'id', 'state', 'date', 'operationAmount', 'description', 'from', 'to'}]
+        new_list = [i for i in my_list]
         # сортируем список
         return sorted(new_list, key=lambda x: x.get("date"), reverse=sort_descending)
     else:
