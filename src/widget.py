@@ -22,7 +22,7 @@ def get_date(my_date: Union[str]) -> Optional[str]:
     """Принимает на вход строку с датой в формате "2024-03-11T02:26:18.671407" и возвращает строку с датой в формате
     "ДД.ММ.ГГГГ" ("11.03.2024")"""
     if isinstance(my_date, str) and my_date and my_date[4] == "-" and my_date[7] == "-":
-        print(my_date)
+        # print(my_date)
         if my_date[:10].replace("-", "").isdigit():
             return ".".join(list(reversed(my_date[:10].split("-"))))
     else:
