@@ -1,9 +1,4 @@
-import os
 import re
-from collections import Counter
-
-from config import DATA_PATH
-from src.read_csv_xlsx import convert_csv_to_list
 
 
 def transaction_search(dicts_trans: list, search_str: str) -> list:
