@@ -42,7 +42,7 @@ def main():
             data_filter = filter_by_state(data_json, user_config["status"])
             user_config_operations(data_filter)
         case "2":
-            print("Для обработки выбран CSV-файла.")
+            print("Для обработки выбран CSV-файл.")
             get_status()
             second_menu()
             path_csv = os.path.join(DATA_PATH, "transactions.csv")
@@ -50,7 +50,7 @@ def main():
             data_filter = filter_by_state(data_csv, user_config["status"])
             user_config_operations(data_filter)
         case "3":
-            print("Для обработки выбран XLSX-файла.")
+            print("Для обработки выбран XLSX-файл.")
             get_status()
             second_menu()
             path_xlsx = os.path.join(DATA_PATH, "transactions_excel.xlsx")
