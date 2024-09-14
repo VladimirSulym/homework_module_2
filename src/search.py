@@ -41,6 +41,8 @@ def transaction_search(dicts_trans: list, search_str: str) -> list:
             return result_filter
         else:
             return result
+    elif dicts_trans and (search_str is None or search_str == ""):
+        return dicts_trans
     else:
         return []
 
