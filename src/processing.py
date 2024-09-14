@@ -30,7 +30,7 @@ def sort_by_date(my_list: Union[list], sort_descending: Union[bool] = True) -> U
         if sort_descending is None:
             sort_descending = True
         # удаляем из списка словарь, содержащий не полные данные и формируем новый список для сортировки
-        new_list = [i for i in my_list]
+        new_list = [i for i in my_list if i.get('date')]
         # сортируем список
         return sorted(new_list, key=lambda x: x.get("date"), reverse=sort_descending)
     else:

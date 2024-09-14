@@ -7,8 +7,8 @@ from src.utils import get_amount_transactions_in_rub, get_data_json
 
 @patch("json.load")
 def test_get_data_json(mock_load):
-    mock_load.return_value = 2
-    assert get_data_json(os.path.join(DATA_PATH, "operations.json")) == 2
+    mock_load.return_value = [2]
+    assert get_data_json(os.path.join(DATA_PATH, "operations.json")) == [2]
     assert get_data_json(None) == []
 
 
